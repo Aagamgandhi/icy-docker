@@ -1,19 +1,9 @@
-# Python image as the base image (consider version 3.9)
+# PostgreSQL image as the base image
 
 
-# Set the working directory inside the container as /app
+# Copy the initialization script into the container
+COPY init.sql /docker-entrypoint-initdb.d/
+
+# Expose the default PostgreSQL port
 
 
-# Copy requirements.txt to the working directory
-COPY requirements.txt ./
-
-# Install project dependancies 
-RUN pip install --no-cache-dir -r requirements.txt
-
-# Copy the entire project directory into the container
-COPY . .
-
-# Expose the port on which the web server will listen
-EXPOSE 8080
-
-# Define the command to start the web server
